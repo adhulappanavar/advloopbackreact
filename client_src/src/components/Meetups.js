@@ -15,7 +15,8 @@ class Meetups extends Component{
   }
 
   getMeetups(){
-    axios.get('http://localhost:3000/api/meetups')
+    const token = "1OllC4f8lwTHZC9bwx2wwnfpNXuMuzDwOI4gR918mZgt0naE9Gw2qJuUOcDIZgX1";
+    axios.get('http://localhost:3000/api/meetups?access_token=1OllC4f8lwTHZC9bwx2wwnfpNXuMuzDwOI4gR918mZgt0naE9Gw2qJuUOcDIZgX1')
       .then(response => {
         this.setState({meetups: response.data}, () => {
           //console.log(this.state);

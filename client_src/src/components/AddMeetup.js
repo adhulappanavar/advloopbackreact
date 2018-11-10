@@ -6,7 +6,7 @@ class AddMeetup extends Component{
   addMeetup(newMeetup){
     axios.request({
       method:'post',
-      url:'http://localhost:3000/api/meetups',
+      url:'http://localhost:3000/api/meetups?access_token=1OllC4f8lwTHZC9bwx2wwnfpNXuMuzDwOI4gR918mZgt0naE9Gw2qJuUOcDIZgX1',
       data: newMeetup
     }).then(response => {
       this.props.history.push('/');

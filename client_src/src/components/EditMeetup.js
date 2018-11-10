@@ -21,7 +21,11 @@ class EditMeetup extends Component{
 
   getMeetupDetails(){
     let meetupId = this.props.match.params.id;
-    axios.get(`http://localhost:3000/api/meetups/${meetupId}`)
+    let token = localStorage.getItem('accToken');
+    console.log("Meetup ID : " + meetupId +" Token " + token);
+    let url = "http://localhost:3000/api/meetups/" + meetupId + "?access_token=" + token;
+    console.log("URL" + url);
+    axios.get(url)
     .then(response => {
       this.setState({
         id: response.data.id,
@@ -36,9 +40,14 @@ class EditMeetup extends Component{
     }
 
   editMeetup(newMeetup){
+    let meetupId = this.state.id;
+    let token = localStorage.getItem('accToken');
+    console.log("Meetup ID : " + meetupId +" Token " + token);
+    let delurl = "http://localhost:3000/api/meetups/" + meetupId + "?access_token=" + token;
+    console.log("URL" + delurl);
     axios.request({
       method:'put',
-      url:`http://localhost:3000/api/meetups/${this.state.id}`,
+      url: delurl,
       data: newMeetup
     }).then(response => {
       this.props.history.push('/');

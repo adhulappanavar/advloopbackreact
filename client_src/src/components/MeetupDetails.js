@@ -16,7 +16,11 @@ class MeetupDetails extends Component{
 
   getMeetup(){
     let meetupId = this.props.match.params.id;
-    axios.get(`http://localhost:3000/api/meetups/${meetupId}`)
+    let token = localStorage.getItem('accToken');
+    console.log("Meetup ID : " + meetupId +" Token " + token);
+    let url = "http://localhost:3000/api/meetups/" + meetupId + "?access_token=" + token;
+    console.log("URL" + url);
+    axios.get(url)
     .then(response => {
       this.setState({details: response.data}, () => {
         console.log(this.state);
@@ -26,8 +30,12 @@ class MeetupDetails extends Component{
   }
 
   onDelete(){
-    let meetupId = this.state.details.id;
-    axios.delete(`http://localhost:3000/api/meetups/${meetupId}`)
+    let meetupId = this.props.match.params.id;
+    let token = localStorage.getItem('accToken');
+    console.log("Meetup ID : " + meetupId +" Token " + token);
+    let url = "http://localhost:3000/api/meetups/" + meetupId + "?access_token=" + token;
+    console.log("URL" + url);
+    axios.delete(url)
       .then(response => {
         this.props.history.push('/');
       }).catch(err => console.log(err));
